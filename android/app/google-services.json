@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "786673798005",
+    "project_id": "shopping-list-d4228",
+    "storage_bucket": "shopping-list-d4228.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786673798005:android:b2054bf68c37d1c5ca613c",
+        "android_client_info": {
+          "package_name": "com.tomohiro.shopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786673798005-puc7t0jr7k4ug36e2crbo4bgfmgnpp73.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBAoRyQDbHAKCynq-n5NBWb3mNhh3vots"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786673798005-puc7t0jr7k4ug36e2crbo4bgfmgnpp73.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "786673798005-6fm63gce6tqghs4flk1ak9jlvhe00ng0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tomohiro.shopping"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
