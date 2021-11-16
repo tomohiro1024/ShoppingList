@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping/add_shop/add_shopping_page.dart';
 import 'package:shopping/domain/shopping.dart';
 import 'package:shopping/shop_list/shopping_list_model.dart';
 
@@ -34,7 +35,15 @@ class ShoppingListPage extends StatelessWidget {
           }),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: null,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddShoppingPage(),
+                fullscreenDialog: true,
+              ),
+            );
+          },
           tooltip: 'Increment',
           child: const Icon(Icons.add),
         ),
