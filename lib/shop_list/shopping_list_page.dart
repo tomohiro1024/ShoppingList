@@ -34,19 +34,32 @@ class ShoppingListPage extends StatelessWidget {
             );
           }),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AddShoppingPage(),
-                fullscreenDialog: true,
-              ),
-            );
-          },
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ),
+        floatingActionButton:
+            Consumer<ShoppingListModel>(builder: (context, model, child) {
+          return FloatingActionButton(
+            onPressed: () async {
+              final bool? added = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddShoppingPage(),
+                  fullscreenDialog: true,
+                ),
+              );
+
+              if (added != null && added) {
+                final snackBar = SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Text('追加しました'),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+
+              model.fetchShoppingList();
+            },
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          );
+        }),
       ),
     );
   }

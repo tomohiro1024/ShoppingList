@@ -40,8 +40,17 @@ class AddShoppingPage extends StatelessWidget {
                     height: 15,
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      model.addshopping();
+                    onPressed: () async {
+                      try {
+                        await model.addshopping();
+                        Navigator.of(context).pop(true);
+                      } catch (e) {
+                        final snackBar = SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(e.toString()),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
                     },
                     child: Text('追加する'),
                   ),
