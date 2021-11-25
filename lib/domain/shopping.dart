@@ -1,5 +1,6 @@
 class Shopping {
-  Shopping(this.title, this.price);
+  Shopping(this.id, this.title, this.price);
+  String id;
   String title;
   String price;
 }

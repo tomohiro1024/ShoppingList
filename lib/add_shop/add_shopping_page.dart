@@ -10,6 +10,7 @@ class AddShoppingPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('商品の追加'),
+          backgroundColor: Colors.orange,
         ),
         body: Center(
           child: Consumer<AddShoppingModel>(builder: (context, model, child) {
@@ -29,6 +30,7 @@ class AddShoppingPage extends StatelessWidget {
                     height: 10,
                   ),
                   TextField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: '価格',
                     ),
@@ -53,6 +55,9 @@ class AddShoppingPage extends StatelessWidget {
                       }
                     },
                     child: Text('追加する'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.orange,
+                    ),
                   ),
                 ],
               ),

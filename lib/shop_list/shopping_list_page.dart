@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping/add_shop/add_shopping_page.dart';
 import 'package:shopping/domain/shopping.dart';
+import 'package:shopping/edit_shop/edit_shopping_page.dart';
 import 'package:shopping/shop_list/shopping_list_model.dart';
 
 class ShoppingListPage extends StatelessWidget {
@@ -12,6 +13,7 @@ class ShoppingListPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('買い物リスト'),
+          backgroundColor: Colors.green,
         ),
         body: Center(
           child: Consumer<ShoppingListModel>(builder: (context, model, child) {
@@ -26,6 +28,24 @@ class ShoppingListPage extends StatelessWidget {
                   (shopping) => ListTile(
                     title: Text(shopping.title),
                     subtitle: Text(shopping.price),
+                    onTap: () async {
+                      final String? title = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditShoppingPage(shopping),
+                        ),
+                      );
+
+                      if (title != null) {
+                        final snackBar = SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text('$titleを編集しました'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+
+                      model.fetchShoppingList();
+                    },
                   ),
                 )
                 .toList();
@@ -58,6 +78,7 @@ class ShoppingListPage extends StatelessWidget {
             },
             tooltip: 'Increment',
             child: const Icon(Icons.add),
+            backgroundColor: Colors.green,
           );
         }),
       ),
