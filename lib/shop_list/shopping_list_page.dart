@@ -25,27 +25,41 @@ class ShoppingListPage extends StatelessWidget {
 
             final List<Widget> widgets = shops
                 .map(
-                  (shopping) => ListTile(
-                    title: Text(shopping.title),
-                    subtitle: Text(shopping.price),
-                    onTap: () async {
-                      final String? title = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditShoppingPage(shopping),
-                        ),
-                      );
+                  (shopping) => Container(
+                    decoration: new BoxDecoration(
+                      border: new Border(
+                        bottom: new BorderSide(color: Colors.green),
+                      ),
+                    ),
+                    child: ListTile(
+                        title: Text(shopping.title),
+                        subtitle: Text(shopping.price + '円'),
+                        onTap: () async {
+                          final String? title = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditShoppingPage(shopping),
+                            ),
+                          );
 
-                      if (title != null) {
-                        final snackBar = SnackBar(
-                          backgroundColor: Colors.green,
-                          content: Text('$titleを編集しました'),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
+                          if (title != null) {
+                            final snackBar = SnackBar(
+                              backgroundColor: Colors.green,
+                              content: Text('$titleを編集しました'),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
 
-                      model.fetchShoppingList();
-                    },
+                          model.fetchShoppingList();
+                        },
+                        trailing: IconButton(
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                          onPressed: () {},
+                        )),
                   ),
                 )
                 .toList();
