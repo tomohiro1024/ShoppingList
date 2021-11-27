@@ -19,4 +19,11 @@ class ShoppingListModel extends ChangeNotifier {
     this.shops = shops;
     notifyListeners();
   }
+
+  Future delete(Shopping shopping) {
+    return FirebaseFirestore.instance
+        .collection('shops')
+        .doc(shopping.id)
+        .delete();
+  }
 }

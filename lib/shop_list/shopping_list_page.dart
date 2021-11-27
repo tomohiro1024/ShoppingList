@@ -45,7 +45,7 @@ class ShoppingListPage extends StatelessWidget {
                           if (title != null) {
                             final snackBar = SnackBar(
                               backgroundColor: Colors.green,
-                              content: Text('$titleを編集しました'),
+                              content: Text('『$title』を編集しました'),
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
@@ -58,7 +58,9 @@ class ShoppingListPage extends StatelessWidget {
                             Icons.delete,
                             color: Colors.red,
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            await showConfirmDialog(context, shopping, model);
+                          },
                         )),
                   ),
                 )
@@ -96,6 +98,40 @@ class ShoppingListPage extends StatelessWidget {
           );
         }),
       ),
+    );
+  }
+
+  Future showConfirmDialog(
+      BuildContext context, Shopping shopping, ShoppingListModel model) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return AlertDialog(
+          title: Text("削除の確認"),
+          content: Text("『${shopping.title}』を削除しますか？"),
+          actions: [
+            TextButton(
+              child: Text("YES"),
+              onPressed: () async {
+                await model.delete(shopping);
+                Navigator.pop(context);
+                final snackBar = SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text('${shopping.title}を削除しました'),
+                );
+                // 削除しましたというメッセージのポップが出たあとは、最新の情報のShoppingListを表示させなくてはならない。
+                model.fetchShoppingList();
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+            ),
+            TextButton(
+              child: Text("NO"),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+      },
     );
   }
 }
